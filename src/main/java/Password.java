@@ -22,6 +22,22 @@ public class Password {
     }
 
     public Boolean checkLetters() {
+        char[] letters = this.pw.toCharArray();
+        boolean small = false;
+        boolean capital = false;
+
+        for (int i = 0; i < letters.length; i++) {
+            if(letters[i] <= 122 && letters[i] >= 97){
+                small = true;
+            }
+            if(letters[i] <= 90 && letters[i] >= 65){
+                capital = true;
+            }
+
+            if (small == true && capital == true) {
+                return true;
+            }
+        }
         return false;
     }
 }
