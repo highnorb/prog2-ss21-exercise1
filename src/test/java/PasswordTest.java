@@ -44,10 +44,40 @@ public class PasswordTest {
 
     @DisplayName("Letters small and capital")
     @Test
-    public void testLetters(){
+    public void testLettersBoth(){
         testPassword = new Password("asdfgASDFG");
-        Boolean expected = true;
         Boolean actual = testPassword.checkLetters();
+        assertTrue(actual);
     }
+
+    @DisplayName("Just small letters")
+    @Test
+    public void testLettersSmall(){
+        testPassword = new Password("asdfgasdfsadf");
+        Boolean actual = testPassword.checkLetters();
+        assertFalse(actual);
+    }
+
+    @DisplayName("Just capital letters")
+    @Test
+    public void testLettersCapital(){
+        testPassword = new Password("ASDFGHJKLJJGHSFD");
+        assertFalse(testPassword.checkLetters());
+    }
+
+    @DisplayName("Just numbers")
+    @Test
+    public void testLettersNumbers(){
+        testPassword = new Password("1234567890");
+        assertFalse(testPassword.checkLetters());
+    }
+
+    @DisplayName("Nothing")
+    @Test
+    public void testLettersNothing(){
+        testPassword = new Password("");
+        assertFalse(testPassword.checkLetters());
+    }
+
 
 }

@@ -13,6 +13,7 @@ public class Password {
         this.pw = pw;
     }
 
+
     public Boolean checkLength() {
         if(this.pw.length() >= 8 && this.pw.length() <= 25) {
             return true;
