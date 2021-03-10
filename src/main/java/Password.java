@@ -19,5 +19,9 @@ public class Password {
         }
         return false;
     }
+
+    public Boolean checkLetters() {
+        return false;
+    }
 }
 
