@@ -97,4 +97,11 @@ public class PasswordTest {
         assertTrue(testPassword.checkNumbersInside());
     }
 
+    @DisplayName("No numbers, but signs inside")
+    @Test
+    public void testNumbersNotSignsInside(){
+        testPassword = new Password("asdffadffs!=)345678jgkj");
+        assertTrue(testPassword.checkNumbersInside());
+    }
+
 }

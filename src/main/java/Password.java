@@ -43,6 +43,13 @@ public class Password {
     }
 
     public Boolean checkNumbersInside() {
+        char[] numbers = this.pw.toCharArray();
+
+        for(int i = 0; i < numbers.length; i++){
+            if(numbers[i] <= 57 && numbers[i] >= 49){
+                return true;
+            }
+        }
         return false;
     }
 
