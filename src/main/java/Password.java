@@ -1,4 +1,8 @@
+import java.util.regex.Pattern;
+
+
 public class Password {
+
     String pw;
 
     public Password(String pw){
@@ -14,14 +18,17 @@ public class Password {
     }
 
 
-    public Boolean checkLength() {
+    public final Pattern textPatternSpecialsigns = Pattern.compile("[()#$?!%/@]");
+
+
+    public boolean checkLength() {
         if(this.pw.length() >= 8 && this.pw.length() <= 25) {
             return true;
         }
         return false;
     }
 
-    public Boolean checkLetters() {
+    public boolean checkLetters() {
         char[] letters = this.pw.toCharArray();
         boolean small = false;
         boolean capital = false;
@@ -42,7 +49,7 @@ public class Password {
         return false;
     }
 
-    public Boolean checkNumbersInside() {
+    public boolean checkNumbersInside() {
         char[] numbers = this.pw.toCharArray();
 
         for(int i = 0; i < numbers.length; i++){
@@ -52,6 +59,11 @@ public class Password {
         }
         return false;
     }
+
+    public boolean checkSepcialsigns(){
+        return textPatternSpecialsigns.matcher(this.pw).find();
+    }
+
 
 }
 

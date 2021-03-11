@@ -104,4 +104,26 @@ public class PasswordTest {
         assertTrue(testPassword.checkNumbersInside());
     }
 
+    @DisplayName("All special signs included")
+    @Test
+    public void testSpecialsignsAllInside(){
+        testPassword = new Password("asdf()#$?!%/@");
+        assertTrue(testPassword.checkSepcialsigns());
+    }
+
+    @DisplayName("No special signs included")
+    @Test
+    public void testSpecialsignsNotInside(){
+        testPassword = new Password("asdfwertzuio");
+        assertFalse(testPassword.checkSepcialsigns());
+    }
+
+    @DisplayName("Special Signs not included")
+    @Test
+    public void testSpecialsignsPartlyInside(){
+        testPassword = new Password("asdfwer?!tzuio");
+        assertTrue(testPassword.checkSepcialsigns());
+    }
+
+
 }
