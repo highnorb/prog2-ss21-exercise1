@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.*;
-
 import static org.junit.jupiter.api.Assertions.*;
+
+//GIT-URL: https://github.com/highnorb/prog2-ss21-exercise1
 
 public class PasswordTest {
 
@@ -25,9 +26,6 @@ public class PasswordTest {
     @Test
     public void testRightLength(){
         testPassword = new Password("asdfsadfsadfsdf");
-        //Boolean expected = true;
-        //Boolean actual = testPassword.checkLength();
-        //assertEquals(expected, actual);
         assertTrue(testPassword.checkLength());
     }
 
