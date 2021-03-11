@@ -18,8 +18,6 @@ public class Password {
     }
 
 
-    public final Pattern textPatternSpecialsignsGood = Pattern.compile("[()#$?!%/@]");
-    public final Pattern textPatternSpecialsignsBad = Pattern.compile("[-§&=`´+*~'{}²³_.:,;µ|<>€]");
 
     public boolean checkLength() {
         if(this.pw.length() >= 8 && this.pw.length() <= 25) {
@@ -60,12 +58,35 @@ public class Password {
         return false;
     }
 
+    //REGEX-Patterns for Task 4.
+    public final Pattern textPatternSpecialsignsGood = Pattern.compile("[()#$?!%/@]");
+    public final Pattern textPatternSpecialsignsBad = Pattern.compile("[-§&=`´+*~'{}²³_.:,;µ|<>€]");
+    public final Pattern textPatternNumberline = Pattern.compile("123|234|345|456|567|678|789|890|012");
+    public final Pattern textPatternUnitynumberline = Pattern.compile("1111|2222|3333|4444|5555|6666|7777|8888|9999|0000");
+
+
+    //If pattern finds signs --> true
     public boolean checkSpecialsignsGood(){
         return textPatternSpecialsignsGood.matcher(this.pw).find();
     }
 
+    //if pattern finds signs is true, return false. Else, return true.
     public boolean checkSpecialsignsBad(){
         if(textPatternSpecialsignsBad.matcher(this.pw).find()){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkNumberline(){
+        if(textPatternNumberline.matcher(this.pw).find()){
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkUnitynumberline() {
+        if(textPatternUnitynumberline.matcher(this.pw).find()){
             return false;
         }
         return true;

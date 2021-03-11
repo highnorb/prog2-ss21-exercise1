@@ -126,16 +126,52 @@ public class PasswordTest {
 
     @DisplayName("Special sign - included.")
     @Test
-    public void testSpecialsign1(){
+    public void testSpecialsignBad1(){
         testPassword = new Password("-asdfwer?!tzuio");
         assertFalse(testPassword.checkSpecialsignsBad());
     }
 
     @DisplayName("Special sign § included.")
     @Test
-    public void testSpecialsign2(){
+    public void testSpecialsignBad2(){
         testPassword = new Password("§asdfwer?!tzuio");
         assertFalse(testPassword.checkSpecialsignsBad());
     }
+
+    @DisplayName("All bad special signs included.")
+    @Test
+    public void testSpecialsignBadAll(){
+        testPassword = new Password("-§&=`´+*~'{}²³_.:,;µ|<>€");
+        assertFalse(testPassword.checkSpecialsignsBad());
+    }
+
+    @DisplayName("Numberline included.")
+    @Test
+    public void testNumberlineIncluded(){
+        testPassword = new Password("asdfsad123");
+        assertFalse(testPassword.checkNumberline());
+    }
+
+    @DisplayName("Numberline not included.")
+    @Test
+    public void testNumberlineNotIncluded(){
+        testPassword = new Password("asdfsad1k2k3k");
+        assertTrue(testPassword.checkNumberline());
+    }
+
+    @DisplayName("Unity-Numberline included.")
+    @Test
+    public void testUnitynumberlineIncluded(){
+        testPassword = new Password("asdfsad1111");
+        assertFalse(testPassword.checkUnitynumberline());
+    }
+
+    @DisplayName("Unity-Numberline not included.")
+    @Test
+    public void testUnitynumberlineNotIncluded(){
+        testPassword = new Password("asdfsad111stfhh");
+        assertTrue(testPassword.checkUnitynumberline());
+    }
+
 
 }
