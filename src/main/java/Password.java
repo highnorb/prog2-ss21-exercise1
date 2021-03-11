@@ -30,6 +30,7 @@ public class Password {
             if(letters[i] <= 122 && letters[i] >= 97){
                 small = true;
             }
+
             if(letters[i] <= 90 && letters[i] >= 65){
                 capital = true;
             }
@@ -40,5 +41,10 @@ public class Password {
         }
         return false;
     }
+
+    public Boolean checkNumbersInside() {
+        return false;
+    }
+
 }
 

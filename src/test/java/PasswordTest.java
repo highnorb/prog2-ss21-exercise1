@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +26,9 @@ public class PasswordTest {
     @Test
     public void testRightLength(){
         testPassword = new Password("asdfsadfsadfsdf");
+        //Boolean expected = true;
+        //Boolean actual = testPassword.checkLength();
+        //assertEquals(expected, actual);
         assertTrue(testPassword.checkLength());
     }
 
@@ -79,5 +83,18 @@ public class PasswordTest {
         assertFalse(testPassword.checkLetters());
     }
 
+    @DisplayName("No numbers inside")
+    @Test
+    public void testNumbersNotInside(){
+        testPassword = new Password("asdffadffjgkj");
+        assertFalse(testPassword.checkNumbersInside());
+    }
+
+    @DisplayName("Numbers inside")
+    @Test
+    public void testNumbersInside(){
+        testPassword = new Password("asdffadffs345678jgkj");
+        assertTrue(testPassword.checkNumbersInside());
+    }
 
 }
