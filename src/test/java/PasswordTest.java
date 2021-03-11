@@ -1,19 +1,18 @@
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.condition.DisabledIfEnvironmentVariable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordTest {
 
     @BeforeAll
-    static void init(){}
+    static void setUpAll(){}
 
     @BeforeEach
     void setUp(){}
 
     Password testPassword;
 
-    @DisplayName("Test Constructor")
+    @DisplayName("Test Constructor.")
     @Test
     public void testCreatePassword(){
         testPassword = new Password("testPassword");
@@ -22,7 +21,7 @@ public class PasswordTest {
         assertEquals(actual, expected);
     }
 
-    @DisplayName("Length right")
+    @DisplayName("Length is right")
     @Test
     public void testRightLength(){
         testPassword = new Password("asdfsadfsadfsdf");
@@ -32,21 +31,21 @@ public class PasswordTest {
         assertTrue(testPassword.checkLength());
     }
 
-    @DisplayName("PW is too short")
+    @DisplayName("Length is too short")
     @Test
     public void testTooShort(){
         testPassword = new Password("asd");
         assertFalse(testPassword.checkLength());
     }
 
-    @DisplayName("PW is too long")
+    @DisplayName("Length is too long.")
     @Test
     public void testTooLong(){
         testPassword = new Password("1234567890adfghjadgdgdfgadfgaertsdadsf");
         Assertions.assertFalse(testPassword.checkLength());
     }
 
-    @DisplayName("Letters small and capital")
+    @DisplayName("Letters small and capital included.")
     @Test
     public void testLettersBoth(){
         testPassword = new Password("asdfgASDFG");
@@ -54,7 +53,7 @@ public class PasswordTest {
         assertTrue(actual);
     }
 
-    @DisplayName("Just small letters")
+    @DisplayName("Just small letters included.")
     @Test
     public void testLettersSmall(){
         testPassword = new Password("asdfgasdfsadf");
@@ -62,68 +61,81 @@ public class PasswordTest {
         assertFalse(actual);
     }
 
-    @DisplayName("Just capital letters")
+    @DisplayName("Just capital letters included.")
     @Test
     public void testLettersCapital(){
         testPassword = new Password("ASDFGHJKLJJGHSFD");
         assertFalse(testPassword.checkLetters());
     }
 
-    @DisplayName("Just numbers")
+    @DisplayName("Just numbers included.")
     @Test
     public void testLettersNumbers(){
         testPassword = new Password("1234567890");
         assertFalse(testPassword.checkLetters());
     }
 
-    @DisplayName("Nothing")
+    @DisplayName("Empty password.")
     @Test
     public void testLettersNothing(){
         testPassword = new Password("");
         assertFalse(testPassword.checkLetters());
     }
 
-    @DisplayName("No numbers inside")
+    @DisplayName("No numbers inside.")
     @Test
     public void testNumbersNotInside(){
         testPassword = new Password("asdffadffjgkj");
         assertFalse(testPassword.checkNumbersInside());
     }
 
-    @DisplayName("Numbers inside")
+    @DisplayName("Some numbers inside.")
     @Test
     public void testNumbersInside(){
         testPassword = new Password("asdffadffs345678jgkj");
         assertTrue(testPassword.checkNumbersInside());
     }
 
-    @DisplayName("No numbers, but signs inside")
+    @DisplayName("No numbers, but signs inside.")
     @Test
     public void testNumbersNotSignsInside(){
         testPassword = new Password("asdffadffs!=)345678jgkj");
         assertTrue(testPassword.checkNumbersInside());
     }
 
-    @DisplayName("All special signs included")
+    @DisplayName("All special signs included.")
     @Test
     public void testSpecialsignsAllInside(){
         testPassword = new Password("asdf()#$?!%/@");
-        assertTrue(testPassword.checkSepcialsigns());
+        assertTrue(testPassword.checkSpecialsignsGood());
     }
 
-    @DisplayName("No special signs included")
+    @DisplayName("No special signs included.")
     @Test
     public void testSpecialsignsNotInside(){
         testPassword = new Password("asdfwertzuio");
-        assertFalse(testPassword.checkSepcialsigns());
+        assertFalse(testPassword.checkSpecialsignsGood());
     }
 
-    @DisplayName("Special Signs not included")
+    @DisplayName("Some special signs included.")
     @Test
     public void testSpecialsignsPartlyInside(){
         testPassword = new Password("asdfwer?!tzuio");
-        assertTrue(testPassword.checkSepcialsigns());
+        assertTrue(testPassword.checkSpecialsignsGood());
     }
 
+    @DisplayName("Special sign - included.")
+    @Test
+    public void testSpecialsign1(){
+        testPassword = new Password("-asdfwer?!tzuio");
+        assertFalse(testPassword.checkSpecialsignsBad());
+    }
+
+    @DisplayName("Special sign § included.")
+    @Test
+    public void testSpecialsign2(){
+        testPassword = new Password("§asdfwer?!tzuio");
+        assertFalse(testPassword.checkSpecialsignsBad());
+    }
 
 }

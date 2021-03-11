@@ -18,8 +18,8 @@ public class Password {
     }
 
 
-    public final Pattern textPatternSpecialsigns = Pattern.compile("[()#$?!%/@]");
-
+    public final Pattern textPatternSpecialsignsGood = Pattern.compile("[()#$?!%/@]");
+    public final Pattern textPatternSpecialsignsBad = Pattern.compile("[-§&=`´+*~'{}²³_.:,;µ|<>€]");
 
     public boolean checkLength() {
         if(this.pw.length() >= 8 && this.pw.length() <= 25) {
@@ -60,10 +60,16 @@ public class Password {
         return false;
     }
 
-    public boolean checkSepcialsigns(){
-        return textPatternSpecialsigns.matcher(this.pw).find();
+    public boolean checkSpecialsignsGood(){
+        return textPatternSpecialsignsGood.matcher(this.pw).find();
     }
 
+    public boolean checkSpecialsignsBad(){
+        if(textPatternSpecialsignsBad.matcher(this.pw).find()){
+            return false;
+        }
+        return true;
+    }
 
 }
 
